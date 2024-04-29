@@ -2,6 +2,7 @@ require('dotenv').config();
 const { initializeApp } = require('firebase/app');
 const { getAxiosInstance } = require('axios');
 const { errorHandler } = require('./helper');
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } = require('firebase/auth');
 const { getFirestoree, doc, setDoc, collection, getDocs, query, where, getFirestore } = require('firebase/firestore');
 
 // const errorHandler = (error, functionName, module) => {
@@ -33,11 +34,13 @@ const firebaseConfig = {
 
 let app;
 let firestoreDb;
+let auth;
 
 const initializeFirebaseApp = () => {
     try {
         app = initializeApp(firebaseConfig);
         firestoreDb = getFirestore();
+        auth = getAuth(app);
         return app;
     } catch (error) {
         errorHandler(error, "initializeFirebaseApp", "firebase");
@@ -91,10 +94,44 @@ const getRaspberryCounts = async () => {
     }
 }
 
+const registerUser = async (email, password) => {
+    try {
+        const auth = getAuth();
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        return userCredential.user.uid;
+    } catch (error) {
+        if (error.code === 'auth/email-already-in-use') {
+            throw new Error('Email is already in use');
+        } else if (error.code === 'auth/weak-password') {
+            throw new Error('Password is too weak');
+        } else if (error.code === 'auth/invalid-email') {
+            throw new Error('Invalid email');
+        } else {
+            errorHandler(error, 'registerUser', 'firebase');
+        }
+    }
+}
+
+const loginUser = async (email, password) => {
+    try {
+        const auth = getAuth();
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        return userCredential.user.uid;
+    } catch (error) {
+        if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+            throw new Error('Incorrect email or password');
+        } else {
+            errorHandler(error, 'loginUser', 'firebase');
+        }
+    }
+}
+
 module.exports = {
     initializeFirebaseApp,
     getFirebaseApp,
     uploaProcessedData,
     getTheData,
     getRaspberryCounts,
+    registerUser,
+    loginUser,
 };

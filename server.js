@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.use(express.static('public'));
+app.use(express.json());
 
 // Initialize Firebase
 firebase.initializeFirebaseApp();
@@ -47,5 +48,47 @@ app.get('/get-counts', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.post('/register', async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    try {
+        const userId = await firebase.registerUser(email, password);
+        res.status(200).json({ userId });
+    } catch (error) {        
+        if (error.message === 'Email is already in use') {
+            return res.status(400).json({ error: 'Email is already in use' });
+        } else if (error.code === 'auth/weak-password') {
+            return res.status(400).json({ error: 'Password is too weak' });
+        } else if (error.code === 'auth/invalid-email') {
+            return res.status(400).json({ error: 'Invalid email' });
+        } else {
+            console.error(error);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+});
+
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    try {
+        const userId = await firebase.loginUser(email, password);
+        res.status(200).json({ userId });
+    } catch (error) {
+        if (error.message === 'Incorrect email or password') {
+            return res.status(400).json({ error: 'Incorrect email or password' });
+        } else {
+            console.error(error);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
     }
 });

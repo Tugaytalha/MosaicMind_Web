@@ -23,6 +23,7 @@ function errorHandler(error, name, from) {
     }
 
     loggerFunction("----------END ERROR----------");
+    throw new Error("An error occurred. Check the logs for more information.");
 }
 
 module.exports = {
