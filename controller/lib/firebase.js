@@ -1,8 +1,14 @@
 require('dotenv').config();
 const { initializeApp } = require('firebase/app');
-const { getAxiosInstance } = require('./controller/lib/axios');
-const { errorHandler } = require('./controller/lib/helper');
-const { getFirestoree, doc, setDoc, collection, getDocs, query, where, orderBy, limit, startAt, endAt } = require('firebase/firestore');
+const { getAxiosInstance } = require('axios');
+const { errorHandler } = require('./helper');
+const { getFirestoree, doc, setDoc, collection, getDocs, query, where, getFirestore } = require('firebase/firestore');
+
+// const errorHandler = (error, functionName, module) => {
+//     console.error(`Error in ${module} module, ${functionName} function: ${error}`);
+//     // Add your error handling logic here
+// };
+
 const {
     FIREBASE_API_KEY,
     FIREBASE_AUTH_DOMAIN,
@@ -52,7 +58,7 @@ const uploaProcessedData = async (data) => {
 
 const getTheData = async (from, to) => {
     try {
-        const collectionRef = collection(firestoreDb, "processed-data");
+        const collectionRef = collection(firestoreDb, "rasperryCounts");
         const finalData = [];
         const q = query(collectionRef);
 
@@ -67,9 +73,28 @@ const getTheData = async (from, to) => {
     }
 }
 
+const getRaspberryCounts = async () => {
+    try {
+        const firestoreDb = getFirestore();
+        const collectionRef = collection(firestoreDb, 'rasperryCounts');
+        const q = query(collectionRef);
+        const querySnapshot = await getDocs(q);
+        const raspberryCounts = [];
+        
+        querySnapshot.forEach((doc) => {
+            raspberryCounts.push(doc.data());
+        });
+        
+        return raspberryCounts;
+    } catch (error) {
+        errorHandler(error, 'getRaspberryCounts', 'firebase');
+    }
+}
 
 module.exports = {
     initializeFirebaseApp,
     getFirebaseApp,
     uploaProcessedData,
+    getTheData,
+    getRaspberryCounts,
 };
