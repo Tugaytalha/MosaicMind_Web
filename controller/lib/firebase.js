@@ -76,23 +76,48 @@ const getTheData = async (from, to) => {
     }
 }
 
+const parseRaspberryData = (data) => {
+    const parsedData = {};
+    data.split(', ').forEach(item => {
+        const [key, value] = item.split(':');
+        parsedData[key.trim()] = parseInt(value.trim());
+    });
+    return parsedData;
+};
+
 const getRaspberryCounts = async () => {
     try {
         const firestoreDb = getFirestore();
         const collectionRef = collection(firestoreDb, 'rasperryCounts');
-        const q = query(collectionRef);
-        const querySnapshot = await getDocs(q);
-        const raspberryCounts = [];
-        
-        querySnapshot.forEach((doc) => {
-            raspberryCounts.push(doc.data());
+        const querySnapshot = await getDocs(collectionRef);
+
+        const raspberryCounts = {};
+
+        querySnapshot.forEach(doc => {
+            const data = doc.data();
+            const machineId = doc.id;
+            if (machineId.startsWith('raspberry_machine_')) {
+                for (const key in data) {
+                    data[key.replace("r", "r" + machineId.at(18))] = data[key];
+                    delete data[key];
+                }
+
+                // add data to raspberryCounts
+                for (const key in data) {
+                    if (raspberryCounts[key]) {
+                        raspberryCounts[key] += data[key];
+                    } else {
+                        raspberryCounts[key] = data[key];
+                    }
+                }
+            }
         });
-        
-        return raspberryCounts;
+
+        return [raspberryCounts]; // Wrap in an array as requested in the output
     } catch (error) {
         errorHandler(error, 'getRaspberryCounts', 'firebase');
     }
-}
+};
 
 const registerUser = async (email, password) => {
     try {
