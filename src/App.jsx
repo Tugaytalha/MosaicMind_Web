@@ -6,7 +6,6 @@ import Machines from './pages/Machines';
 import Navbar from './pages/navbar'; // Ensure correct case for the import
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
-import ImageUpload from './pages/ImageUpload';
 
 // Component to conditionally render Navbar
 const Layout = ({ children }) => {
@@ -32,7 +31,6 @@ export default function App() {
                     <Route path="/machines" element={<Layout><Machines /></Layout>} />
                     <Route path="/signup" element={<Layout><Signup /></Layout>} />
                     <Route path="/signin" element={<Layout><Signin /></Layout>} />
-                    <Route path="/upload" element={<Layout><ImageUpload /></Layout>} />
                 </Routes>
             </div>
         </BrowserRouter>
