@@ -18,7 +18,8 @@ firebase.initializeFirebaseApp();
 
 // Middleware to enable CORS
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // Update with frontend URL
+    res.header("Access-Control-Allow-Origin", "https://main--mosaic-mind.netlify.app/machines"); // Update with frontend URL
+    
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
