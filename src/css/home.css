@@ -1,0 +1,159 @@
+/*________________________TO REMOVE INHERITED DECORATION FEATURES OF LINK ________________________*/
+.text-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+/*________________________HOME________________________*/
+
+.container{
+
+	position: absolute;
+	top: 50%;
+	bottom: 50%;
+	left: 35%;
+	right: 50%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: cadetblue;
+	width: 30vw;
+	height: 65vh;
+	gap: 1rem;
+	margin: auto;
+}
+
+.inner-container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.buttons button{
+	width: 100%;
+}
+
+/*________________________MACHINE & MACHINES________________________*/
+.machines{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.machineN{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid white;
+}
+
+.statusRepresentation-online{
+	width: 20px;
+	height: 20px;
+	background-color: green;
+	border-radius: 50%;
+}
+
+.statusRepresentation-offline{
+	width: 20px;
+	height: 20px;
+	background-color: red;
+	border-radius: 50%;
+}
+
+.machineStatus{
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.machineImg{
+	border-radius: 20%;
+	margin: 1rem;
+}
+
+/*________________________NAVBAR________________________*/
+.navbar{
+	width: 100vw;
+	height: 60px;
+	padding: 10px 0;
+	display: flex;
+	justify-content: space-around;
+	background-color: cadetblue;
+}
+
+
+/*________________________TEXTS________________________*/
+
+/*Headers*/
+.text-1{
+	font-size: large;
+	font-weight: bold;
+	color: white;
+}
+
+/*Regular texts*/
+.text-2{
+	color: white;
+	font-size: 20px;
+	margin: 10px 10px;
+}
+
+/*Navbar texts*/
+.text-3{
+	font-size: 40px;
+	color: black;
+	font-weight: bold;
+}
+
+/*________________________BUTTONS________________________*/
+
+.orangeButton {
+	margin-top: 20px;
+	padding: 10px 20px;
+	background-color: rgb(198, 54, 54);
+	color: white;
+	border: none; /* You can adjust the color as needed */
+	border-radius: 20px; /* Adjust this value to control the bottle shape */
+	position: relative;
+}
+
+.greenButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: rgb(34, 177, 76); /* A green shade */
+    color: white;
+    border: none; 
+    border-radius: 20px; /* Rounded corners */
+    position: relative;
+    cursor: pointer; /* Hand cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.greenButton:hover {
+    background-color: rgb(28, 145, 62); /* Slightly darker green on hover */
+}
+
+.redButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: rgb(207, 0, 15); /* A deeper red shade */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Rounded corners */
+    position: relative;
+    cursor: pointer; /* Hand cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.redButton:hover {
+    background-color: rgb(176, 0, 13); /* Slightly darker red on hover */
+}
+
