@@ -98,10 +98,7 @@ const getRaspberryCounts = async () => {
             const machineId = doc.id;
             if (machineId.startsWith('raspberry_machine_')) {
                 for (const key in data) {
-                    if (key.includes("r"))
-                        data[key.replace("r", "r" + machineId.at(18))] = data[key];
-                    else
-                        data[key + machineId.at(18)] = data[key];
+                    data[key.replace("r", "r" + machineId.at(18))] = data[key];
                     delete data[key];
                 }
 
