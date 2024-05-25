@@ -134,6 +134,14 @@ const registerUser = async (email, password) => {
             throw new Error('Password is too weak');
         } else if (error.code === 'auth/invalid-email') {
             throw new Error('Invalid email');
+        } else if (error.code === 'auth/operation-not-allowed') {
+            throw new Error('Email/password accounts are not enabled. Enable email/password accounts in the Firebase Console, under the Auth tab.');
+        } else if (error.code === 'auth/invalid-credential') {
+            throw new Error('Invalid credential');
+        } else if (error.code === 'auth/network-request-failed') {
+            throw new Error('Network request failed');
+        } else if (error.code === 'auth/too-many-requests') {
+            throw new Error('Too many requests'); 
         } else {
             errorHandler(error, 'registerUser', 'firebase');
         }

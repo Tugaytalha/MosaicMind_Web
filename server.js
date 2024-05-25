@@ -64,11 +64,20 @@ app.post('/register', async (req, res) => {
     } catch (error) {        
         if (error.message === 'Email is already in use') {
             return res.status(400).json({ error: 'Email is already in use' });
-        } else if (error.code === 'auth/weak-password') {
+        } else if (error.code === 'Password is too weak') {
             return res.status(400).json({ error: 'Password is too weak' });
-        } else if (error.code === 'auth/invalid-email') {
+        } else if (error.code === 'Invalid email') {
             return res.status(400).json({ error: 'Invalid email' });
-        } else {
+        } else if (error.code === 'Email/password accounts are not enabled. Enable email/password accounts in the Firebase Console, under the Auth tab.') {
+            return res.status(400).json({ error: 'Email/password accounts are not enabled. Enable email/password accounts in the Firebase Console, under the Auth tab.' });
+        } else if (error.code === 'Invalid credential') {
+            return res.status(400).json({ error: 'Invalid credential' });
+        } else if (error.code === 'Network request failed') {
+            return res.status(400).json({ error: 'Network request failed' });
+        } else if (error.code === 'Too many requests') {
+            return res.status(400).json({ error: 'Too many requests' });
+        } 
+        else {
             console.error(error);
             return res.status(500).json({ error: 'Internal Server Error' });
         }
