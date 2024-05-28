@@ -21,7 +21,7 @@ export default function Machine({ name, status, updates, positiveFeedback, negat
             </div>
             <div className="percentage">
                 <p className="text-2">
-                    The success rate is {successRate}%
+                    {successRate}
                 </p>
             </div>
         </div>

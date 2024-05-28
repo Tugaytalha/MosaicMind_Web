@@ -106,6 +106,7 @@
 	margin: 10px 10px;
 }
 
+
 /*Navbar texts*/
 .text-3{
 	font-size: 40px;
@@ -157,3 +158,70 @@
     background-color: rgb(176, 0, 13); /* Slightly darker red on hover */
 }
 
+/*________________________USER MANUEL________________________*/
+
+/*-----------TEXTS-----------*/
+/*Main title*/
+.text-4{
+	color: white;
+	font-size: 30px;
+	margin: 10px 10px;
+}
+
+/*Sub title*/
+.text-5{
+	color: white;
+	font-size: 20px;
+	margin: 10px 10px;
+}
+
+/*Character sub titles*/
+.text-6{
+	color: white;
+	font-size: 15px;
+	margin: 10px 10px;
+}
+
+/*-----------CONTAINERS-----------*/
+
+.man-table{
+	padding: 20px;
+	display: flex;
+	align-items: start;
+	flex-direction: column;
+	height: 100vh;
+	overflow: scroll;
+	/* background-color: blue; */
+}
+
+.man-sub-table{
+	/* background-color: blue; */
+	margin: 20px;
+	display: flex;
+	align-items: start;
+	flex-direction: column;
+
+	width: 50%;
+
+	text-align: start;
+}
+
+.man-sub-inner-table{
+	/* background-color: brown; */
+	margin: 20px;
+	display: flex;
+	align-items: start;
+	flex-direction: column;
+}
+
+.box{
+	display: flex;
+	align-items: start;
+	flex-direction: column;
+	flex-wrap: wrap;
+	margin: 15px;
+}
+
+.man-sub-inner-table p{
+	margin: 4px;
+}
