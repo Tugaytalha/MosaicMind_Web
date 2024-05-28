@@ -21,11 +21,7 @@ export default function Machine({ name, status, updates, positiveFeedback, negat
             </div>
             <div className="percentage">
                 <p className="text-2">
-<<<<<<< HEAD
-                    The success rate is {successRate}%
-=======
                     {successRate}
->>>>>>> be_tugay
                 </p>
             </div>
         </div>
