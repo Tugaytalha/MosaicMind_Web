@@ -97,9 +97,19 @@ const getRaspberryCounts = async () => {
             const data = doc.data();
             const machineId = doc.id;
             if (machineId.startsWith('raspberry_machine_')) {
+                for (const key in data){
+                    // if key is update key (ends with update-c) take fail key value instead
+                    if (key.endsWith("update-c")) 
+                        data[key] = data[key.replace("update-c", "fail-c")];
+                }
                 for (const key in data) {
-                    data[key.replace("r", "r" + machineId.at(18))] = data[key];
+                    if (key.includes("r")) {
+                        data[key.replace("r", "r" + machineId.at(18))] = data[key];
+                    }
+                    else
+                        data[key + machineId.at(18)] = data[key];
                     delete data[key];
+
                 }
 
                 // add data to raspberryCounts
