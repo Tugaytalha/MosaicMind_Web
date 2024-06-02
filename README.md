@@ -4,7 +4,7 @@ This is a C++ backend server built using the Drogon framework. The server listen
 
 
 ## Usage
-You can access website by visiting 'https://elegant-sable-b636ee.netlify.app/'. And you can send requests to the server by 'https://mosaicmind-web.onrender.com/'. 
+You can access website by visiting 'https://elegant-sable-b636ee.netlify.app/'. And you can send requests to the server by 'https://mosaicmind-web.onrender.com/'. No need to build or run separately. Also, when you build the project yourself, you cannot access the database correctly due to security rules.
 
 ## Prerequisites
 
